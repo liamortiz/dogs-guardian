@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const AUTH_URL = "https://api.petfinder.com/v2/oauth2/token";
-const GET_ANIMALS_URL = "https://api.petfinder.com/v2/animals?type=";
+const GET_ANIMALS_URL = "https://api.petfinder.com/v2/animals?page=1&type=";
 
 interface ResponseTokenData {
     token: string,

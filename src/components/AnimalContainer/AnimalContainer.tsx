@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import DogCard from './AnimalCard';
+import AnimalCard from './AnimalCard';
 import { getAnimals } from '../../api';
+import SearchContainer from '../SearchContainer/SearchContainer';
 
 import './style.scss';
 
 interface AnimalRespData {
     id: number,
     name: string,
+    type: string,
     breeds: object,
     age: string,
     gender: string,
@@ -15,22 +17,25 @@ interface AnimalRespData {
     photos: object[]
 }
 
-const DogCardContainer: React.FC = () => {
+const AnimalCardContainer: React.FC = () => {
 
     const [animals, setAnimals] = useState<AnimalRespData[]>([]);
 
-    function getDogs() {
-        getAnimals('dog').then(data => setAnimals(data.animals));
+    function updateAnimals(animalType: string) {
+        getAnimals(animalType).then(data => setAnimals(data.animals));
     }
 
-   useEffect(getDogs, []);
+   useEffect(() => {updateAnimals("dog")}, []);
 
     return (
+        <div id="wrapper">
+        <SearchContainer updateAnimals={updateAnimals}/>
         <div id="animal-card-container">
             {
-                animals.map(animal=> <DogCard key={animal.id} animal={animal}/>)
+                animals.map(animal=> <AnimalCard key={animal.id} animal={animal}/>)
             }
+        </div>
         </div>
     )
 }
-export default DogCardContainer;
+export default AnimalCardContainer;

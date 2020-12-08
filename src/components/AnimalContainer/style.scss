@@ -1,32 +1,4 @@
-@font-face {
-    font-family: 'Roboto';
-    src: url('../../assets/fonts/Roboto-Regular.ttf');
-}
-.divider {
-    width: 50%;
-    border-bottom: 1px solid rgb(201, 201, 201);
-    margin: 0 auto;
-}
-
-.missing-image-icon {
-    background-image: url('../../assets/icons/dog.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 64px;
-}
-
-.a-btn {
-    display: block;
-    text-align: center;
-    padding: .5em;
-    background: darken($color: #FF5151, $amount: 5%);
-    text-decoration: none;
-    color: white;
-    font-family: 'Roboto';
-    width: 80px;
-    margin: 1em auto;
-}
-
+@import '../../App.scss';
 #animal-card-container {
     display: flex;
     flex-direction: row;
@@ -35,8 +7,8 @@
     .animal-card {
         border: 1px solid rgb(201, 201, 201);
         width: 300px;
+        height: auto;
         padding: 1em;
-        border-radius: 10px;
         margin: .1em;
         text-align: left;
         h2, h3 {
@@ -56,7 +28,7 @@
             margin: 0 auto;
         }
         img {
-            width: 100px;
+            width: 200px;
             height: auto;
             display: block;
             margin: 0 auto;
