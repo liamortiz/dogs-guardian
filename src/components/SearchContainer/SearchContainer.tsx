@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dropdown from '../SearchContainer/Dropdown';
 
 import './style.scss';
@@ -8,12 +8,12 @@ interface SearchContainerProps {
 }
 
 const SearchContainer: React.FC<SearchContainerProps> = (props) => {
-    return(
+
+    function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+    }
+    return (
         <div id="search-container">
-            <form>
-                <input type="text"/>
-                <button type="submit">Find</button>
-            </form>
             <Dropdown updateAnimals={props.updateAnimals}/>
         </div>
     )

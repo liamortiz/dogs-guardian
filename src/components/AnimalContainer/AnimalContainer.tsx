@@ -18,14 +18,16 @@ interface AnimalRespData {
 }
 
 const AnimalCardContainer: React.FC = () => {
-
+    
     const [animals, setAnimals] = useState<AnimalRespData[]>([]);
 
     function updateAnimals(animalType: string) {
         getAnimals(animalType).then(data => setAnimals(data.animals));
     }
+    
+    //console.log(animals)
 
-   useEffect(() => {updateAnimals("dog")}, []);
+    useEffect(() => {updateAnimals("dog")}, []);
 
     return (
         <div id="wrapper">
