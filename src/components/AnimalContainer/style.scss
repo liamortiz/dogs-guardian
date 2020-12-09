@@ -60,24 +60,46 @@
             background: $main-color;
         }
     }
-    .details {
-        
-    }
     .details-1 {
-
+        min-height: 90%;
     }
     .details-2 {
+        min-height: 87%;
         .extra-details {
-            margin: 2em auto;
+            padding: 0;
             font-family: 'Roboto';
-            font-weight: lighter;
+            text-align: center;
+            margin: 2em auto;
+            text-align: center;
+            border-radius: 10px;
+            width: 80%;
             li {
-                margin: .3em .0;
+                display: inline-block;
+                text-align: center;
+                list-style: none;
                 font-weight: bold;
+                margin: .5em 0;
             }
         }
     }
     .details-3 {
-    
+        min-height: 90%;
+        p {
+            font-family: 'Roboto';
+            font-weight: lighter;
+            text-align: center;
+            font-size: 90%;
+            margin: .5em 0;
+        }
+    }
+
+    .dog-happy-icon {
+        background-image: url('../../assets/icons/dog.svg');
+        width: 100px;
+        height: 100px;
+        background-position: center;
+        background-size: contain;
+        margin: 2em auto;
+        margin-bottom: 3em;
     }
 }

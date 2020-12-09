@@ -35,8 +35,6 @@ const AnimalCardContainer: React.FC = () => {
         getAnimals(animalType).then(data => setAnimals(data.animals));
     }
     
-    //console.log(animals)
-
     useEffect(() => {updateAnimals("dog")}, []);
 
     return (

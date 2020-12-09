@@ -95,14 +95,10 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                     draggable={false}
                     showDots={false}
                     responsive={responsive}
-                    infinite={false}
-                    autoPlay={false}
-                    autoPlaySpeed={1000}
                     keyBoardControl={true}
-                    customTransition="all .5"
+                    customTransition="all 1s"
                     transitionDuration={500}
                     containerClass="carousel-container"
-                    removeArrowOnDeviceType={["tablet", "mobile"]}
                     dotListClass="custom-dot-list-style"
                     itemClass="carousel-item-padding-40-px">
                     {
@@ -110,8 +106,8 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                     }
                 </Carousel>
                 <ul className="extra-details">
-                <li>{animal.gender}</li>
-                <li>{animal.age}</li>
+                <li>{animal.gender}/</li>
+                <li>{animal.age}/</li>
                 <li>{animal.breeds.primary}</li>
                 </ul>
             </div>
@@ -119,8 +115,9 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
 
             {currentCardDetails===3 &&
             <div className="details details-3">
-                <h2>Contact <span>Me</span></h2>
+                <h2>Adopt <span>Me</span></h2>
                 <div className="divider"></div>
+                <div className="dog-happy-icon"></div>
                 <p>{animal.contact.address.state} {animal.contact.address.city} {animal.contact.address.country}</p>
                 <p>{animal.contact.email}</p>
                 <p>{animal.contact.phone}</p>
