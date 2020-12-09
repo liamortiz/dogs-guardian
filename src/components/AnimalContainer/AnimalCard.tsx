@@ -30,14 +30,15 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
 
     return (
         <div className="animal-card">
-            <h2>Hi I'm, <span>{animal.name}</span></h2>
+            <h2>Hi, I'm <span>{animal.name}</span></h2>
             <div className="divider"></div>
-
             <img src={imageSrc} alt=""/>
-            
-            <h3>About me</h3>
             <p className="description">{parseDescription(animal.description)}..</p>
-            <button className="a-btn">Details</button>
+            <div className="bullet-nav">
+                <span className="bullet-1 active"></span>
+                <span className="bullet-2"></span>
+                <span className="bullet-3"></span>
+            </div>
         </div>
     )
 }
