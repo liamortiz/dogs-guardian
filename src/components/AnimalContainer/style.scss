@@ -67,7 +67,17 @@
 
     }
     .details-2 {
+        .extra-details {
+            margin: 2em auto;
+            font-family: 'Roboto';
+            font-weight: lighter;
+            li {
+                margin: .3em .0;
+                font-weight: bold;
+            }
+        }
     }
     .details-3 {
+    
     }
 }

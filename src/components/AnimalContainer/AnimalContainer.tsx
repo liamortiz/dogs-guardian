@@ -9,12 +9,22 @@ interface AnimalRespData {
     id: number,
     name: string,
     type: string,
-    breeds: object,
+    breeds: {primary: string},
     age: string,
     gender: string,
     size: string,
     description: string,
-    photos: object[]
+    photos: object[],
+    contact: {
+        address: {
+            address1: string,
+            city: string,
+            country: string,
+            state: string
+        },
+        email: string,
+        phone: string
+    }
 }
 
 const AnimalCardContainer: React.FC = () => {

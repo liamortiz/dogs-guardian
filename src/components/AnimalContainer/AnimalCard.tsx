@@ -1,23 +1,51 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getAnimalById } from '../../api';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 interface AnimalRespData {
     id: number,
     type: string,
     name: string,
-    breeds: object,
+    breeds: {primary: string},
     age: string,
     gender: string,
     size: string,
     description: string,
-    photos: object[] | []
+    photos: object[] | [],
+    contact: {
+        address: {
+            address1: string,
+            city: string,
+            country: string,
+            state: string
+        },
+        email: string,
+        phone: string
+    }
 }
+
+const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1
+    }
+  };
 
 const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
     
     const [imageSrc, setImageSrc] = useState("");
     const [currentCardDetails, setCurrentCardDetails] = useState<number>(1);
-    const [fullAnimalDetails, setFullAnimalDetails] = useState(null);
 
     const smallNavigation = useRef<HTMLDivElement>(null);
 
@@ -39,13 +67,13 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
 
         spanElement.classList.remove('active');
         target.classList.add('active');
-
-        getAnimalById(animal.id).then(data => console.log(data));
         
         setCurrentCardDetails(nextNavIndex);
     }
 
     useEffect(setPreviewImage, [animal.photos]);
+
+    console.log(animal)
 
     return (
         <div className="animal-card">
@@ -61,14 +89,41 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
 
             {currentCardDetails===2 &&
             <div className="details details-2">
-                <h2>Details 2</h2>
-                <p>{animal.id}</p>
+                <h2>Photo<span>shoot</span></h2>
+                <div className="divider"></div>
+                <Carousel swipeable={true}
+                    draggable={false}
+                    showDots={false}
+                    responsive={responsive}
+                    infinite={false}
+                    autoPlay={false}
+                    autoPlaySpeed={1000}
+                    keyBoardControl={true}
+                    customTransition="all .5"
+                    transitionDuration={500}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    dotListClass="custom-dot-list-style"
+                    itemClass="carousel-item-padding-40-px">
+                    {
+                        (animal.photos as []).map((photo: {medium: string}) => <img src={photo.medium} alt=""/>)
+                    }
+                </Carousel>
+                <ul className="extra-details">
+                <li>{animal.gender}</li>
+                <li>{animal.age}</li>
+                <li>{animal.breeds.primary}</li>
+                </ul>
             </div>
             }
 
             {currentCardDetails===3 &&
             <div className="details details-3">
-                <h2>Details 3</h2>
+                <h2>Contact <span>Me</span></h2>
+                <div className="divider"></div>
+                <p>{animal.contact.address.state} {animal.contact.address.city} {animal.contact.address.country}</p>
+                <p>{animal.contact.email}</p>
+                <p>{animal.contact.phone}</p>
             </div>
             }
             <div ref={smallNavigation} className="bullet-nav">
