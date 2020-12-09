@@ -3,23 +3,13 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const AUTH_URL = "https://api.petfinder.com/v2/oauth2/token";
-const GET_ANIMALS_URL = "https://api.petfinder.com/v2/animals?page=1&type=";
+const GET_ANIMALS_URL = "https://api.petfinder.com/v2/animals?page=1&limit=100&type=";
 
 interface ResponseTokenData {
     token: string,
     expires_in: number,
     access_token: string
 }
-
-/*
-interface ResponseError {
-    "type": string,
-    "status": number,
-    "title": string,
-    "detail": string,
-    "invalid-params": any
-}
-*/
 
 const tokenRequestBody = {
     method: 'POST',

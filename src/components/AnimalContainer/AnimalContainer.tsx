@@ -34,7 +34,11 @@ const AnimalCardContainer: React.FC = () => {
         <SearchContainer updateAnimals={updateAnimals}/>
         <div id="animal-card-container">
             {
-                animals.map(animal=> <AnimalCard key={animal.id} animal={animal}/>)
+                animals.map(animal=> {
+                    if (animal.photos.length && animal.description) {
+                        return <AnimalCard key={animal.id} animal={animal}/>
+                    }
+                })
             }
         </div>
         </div>

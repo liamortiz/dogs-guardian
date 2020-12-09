@@ -13,13 +13,18 @@ $main-color: #FF5151;
 .a-btn {
     display: block;
     text-align: center;
-    padding: .5em;
+    padding: 1em;
     background: darken($color: $main-color, $amount: 5%);
     text-decoration: none;
     color: white;
     font-family: 'Roboto';
     width: 80px;
-    margin: 1em auto;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    border: none;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 #wrapper {

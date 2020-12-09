@@ -33,15 +33,11 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
             <h2>Hi I'm, <span>{animal.name}</span></h2>
             <div className="divider"></div>
 
-            {imageSrc && <img src={imageSrc} alt=""/>}
+            <img src={imageSrc} alt=""/>
             
-            {animal.description && 
-                <>
-                <h3>About me</h3>
-                <p className="description">{parseDescription(animal.description)}..</p>
-                </>
-            }
-            <a href="/" className="a-btn">More</a>
+            <h3>About me</h3>
+            <p className="description">{parseDescription(animal.description)}..</p>
+            <button className="a-btn">Details</button>
         </div>
     )
 }
