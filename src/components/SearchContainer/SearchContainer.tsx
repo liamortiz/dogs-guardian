@@ -14,7 +14,9 @@ const SearchContainer: React.FC<SearchContainerProps> = (props) => {
     }
     return (
         <div id="search-container">
-            <Dropdown updateAnimals={props.updateAnimals}/>
+            <Dropdown label={"Gender"} updateAnimals={props.updateAnimals} options={["Male", "Female"]}/>
+            <Dropdown label={"Type"} updateAnimals={props.updateAnimals} options={["Dog", "Cat", "Horse", "Rabbit", "Barnyard"]}/>
+            <Dropdown label={"Size"} updateAnimals={props.updateAnimals} options={["Small (0-25 lbs)", "Medium (26-60 lbs)", "Large (61-100 lbs)", "Huge(101 lbs+)"]}/>
         </div>
     )
 }

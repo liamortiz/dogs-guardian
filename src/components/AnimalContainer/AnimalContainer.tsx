@@ -43,7 +43,7 @@ const AnimalCardContainer: React.FC = () => {
         <div id="animal-card-container">
             {
                 animals.map(animal=> {
-                    if (animal.photos.length && animal.description) {
+                    if (animal.photos.length > 1 && animal.description) {
                         return <AnimalCard key={animal.id} animal={animal}/>
                     }
                 })

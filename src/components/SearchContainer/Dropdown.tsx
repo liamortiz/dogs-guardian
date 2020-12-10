@@ -1,7 +1,9 @@
 import React from 'react';
 
 interface DropdownProps {
-    updateAnimals: (animalType: string) => void
+    updateAnimals: (animalType: string) => void,
+    options: string[],
+    label: string
 }
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
@@ -10,13 +12,9 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         
     }
     return (
-        <select name="types" onChange={handleDropdownChange} defaultValue="dog">
-            <option value="dog">Dogs</option>
-            <option value="cat">Cats</option>
-            <option value="rabbit">Rabbits</option>
-            <option value="horse">Horses</option>
-            <option value="bird">Birds</option>
-            <option value="barnyard">Barnyard</option>
+        <select name="types" onChange={handleDropdownChange} defaultValue="1">
+            <option value='1' disabled>{props.label}</option>
+            {props.options.map(option => <option value={option}>{option}</option>)}
         </select>
     )
 }
