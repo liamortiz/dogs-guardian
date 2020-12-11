@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnimalCard from './AnimalCard';
 import { getAnimals } from '../../api';
 import SearchContainer from '../SearchContainer/SearchContainer';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { animalStateAtom, filterStateAtom } from '../../atoms';
+import { useRecoilState } from 'recoil';
+import { animalStateAtom } from '../../atoms';
 
 import './style.scss';
 
@@ -32,24 +32,35 @@ interface AnimalRespData {
 const AnimalCardContainer: React.FC = () => {
     
     const [animals, setAnimals] = useRecoilState(animalStateAtom);
-    const currentFilter = useRecoilValue(filterStateAtom);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Status 400 Invalid Params
 
     useEffect(() => {
-        getAnimals(`page=1&limit=100&type=${currentFilter.type}`)
-        .then(data => setAnimals(data.animals))
+        getAnimals("type=dog")
+        .then(animals => setAnimals((animals as [])))
     },[]);
+
+    useEffect(() => {
+        if (animals.length === 0 && !isLoading) {
+            setIsLoading(true);
+        } else if (animals.length !== 0 && isLoading) {
+            setIsLoading(false);
+        }
+    },[animals])
 
     return (
         <div id="wrapper">
         <SearchContainer/>
         <div id="animal-card-container">
-            {
-                animals.map(animal=> {
-                    if ((animal as AnimalRespData).photos.length > 1 && (animal as AnimalRespData).description) {
-                        return <AnimalCard key={(animal as AnimalRespData).id} animal={animal}/>
-                    }
-                    return null;
-                })
+            {isLoading && <div className="loader"></div>}
+            
+            {animals.map(animal => <AnimalCard key={(animal as AnimalRespData).id} animal={animal}/>)}
+
+            {!animals &&
+                <div className="no-results">
+                    <h1>No Results</h1>
+                </div>
             }
         </div>
         </div>

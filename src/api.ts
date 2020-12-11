@@ -24,9 +24,19 @@ function setToken() : void {
         cookies.set('token', data.access_token, { path: '/'});
     })
 }
+export function auth() {
+    if (!cookies.get('token')) {
+        console.log("Authenticating..");
+        setToken();
+    }
+}
 
-export async function getAnimals(params: string) {
-    const resp = await fetch(BASE_URL + params, {
+function filterAnimals(animals: {description: string, photos: []}[]) {
+    return animals.filter(animal => animal.description && animal.photos.length > 1);
+}
+
+export async function getAnimals(params: string, page: number=1) {
+    const resp = await fetch(`${BASE_URL}${params}&page=${page}&limit=50&sort=recent`, {
         method: 'GET',
         headers: {'Authorization': `Bearer ${cookies.get('token')}`}
     })
@@ -37,12 +47,8 @@ export async function getAnimals(params: string) {
         auth();
         return {animals: []}
     });
-    return resp;
-}
 
-export function auth() {
-    if (!cookies.get('token')) {
-        console.log("Authenticating..");
-        setToken();
-    }
+    if (resp.status === 401) {auth();}
+
+    return filterAnimals(resp.animals);
 }

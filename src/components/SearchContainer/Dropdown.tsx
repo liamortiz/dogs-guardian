@@ -13,8 +13,8 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         
     }
     return (
-        <select name="types" onChange={handleDropdownChange} defaultValue="1">
-            <option value='1' disabled>{props.label}</option>
+        <select style={{textTransform: "capitalize"}} onChange={handleDropdownChange} defaultValue="1">
+            <option value='1' disabled >{props.label}</option>
             {props.options.map(option => <option key={option} value={option}>{option}</option>)}
         </select>
     )
