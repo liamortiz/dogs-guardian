@@ -89,6 +89,7 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
             <div className="details details-2">
                 <h2>Photo<span>shoot</span></h2>
                 <div className="divider"></div>
+
                 <Carousel swipeable={true}
                     draggable={false}
                     showDots={false}
@@ -98,9 +99,11 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                     transitionDuration={500}
                     containerClass="carousel-container"
                     dotListClass="custom-dot-list-style"
-                    itemClass="carousel-item-padding-40-px">
+                    itemClass="carousel-item-padding-40-px" 
+                    >
                     {
-                        (animal.photos as []).map((photo: {medium: string}) => <img key={animal.id} src={photo.medium} alt=""/>)
+                        (animal.photos as []).map((photo: {medium: string}) => 
+                            <img key={animal.id} src={photo.medium} alt=""/>)
                     }
                 </Carousel>
                 <ul className="extra-details">

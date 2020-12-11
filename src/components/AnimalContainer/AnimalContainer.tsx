@@ -33,6 +33,8 @@ const AnimalCardContainer: React.FC = () => {
     
     const [animals, setAnimals] = useRecoilState(animalStateAtom);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loadingNextPage, setLoadingNextPage] = useState(false);
 
     useEffect(() => {
         getAnimals("type=dog&location=40.712776,-74.005974")
@@ -46,6 +48,22 @@ const AnimalCardContainer: React.FC = () => {
             setIsLoading(false);
         }
     },[animals])
+
+
+    window.onscroll = () => {
+        const yPosition = document.body.scrollHeight - document.documentElement.scrollTop - window.innerHeight;
+        if (yPosition <= 0 && !loadingNextPage) {
+            console.log("here")
+            setLoadingNextPage(true);
+
+            getAnimals("type=dog&location=40.712776,-74.005974", currentPage + 1)
+            .then(a => {
+                setAnimals(animals.concat((a as [])));
+                setLoadingNextPage(false);
+                setCurrentPage(currentPage+1);
+            })
+        }
+    }
 
     return (
         <div id="wrapper">
