@@ -25,10 +25,8 @@ function setToken() : void {
     })
 }
 export function auth() {
-    if (!cookies.get('token')) {
-        console.log("Authenticating..");
-        setToken();
-    }
+    console.log("Authenticating..");
+    setToken();
 }
 
 function filterAnimals(animals: {description: string, photos: []}[]) {
@@ -41,14 +39,9 @@ export async function getAnimals(params: string, page: number=1) {
         headers: {'Authorization': `Bearer ${cookies.get('token')}`}
     })
     .then(resp => resp.json())
-    .catch(() => {
-        console.error("Failed to make API call, re-authenticating..");
-        cookies.remove('token');
-        auth();
+    .catch((err) => {
+        console.error("Failed to make API call", err);
         return {animals: []}
     });
-
-    if (resp.status === 401) {auth();}
-
     return filterAnimals(resp.animals);
 }

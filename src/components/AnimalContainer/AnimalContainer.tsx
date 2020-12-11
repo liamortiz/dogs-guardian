@@ -34,10 +34,8 @@ const AnimalCardContainer: React.FC = () => {
     const [animals, setAnimals] = useRecoilState(animalStateAtom);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Status 400 Invalid Params
-
     useEffect(() => {
-        getAnimals("type=dog")
+        getAnimals("type=dog&location=40.712776,-74.005974")
         .then(animals => setAnimals((animals as [])))
     },[]);
 
@@ -54,7 +52,7 @@ const AnimalCardContainer: React.FC = () => {
         <SearchContainer/>
         <div id="animal-card-container">
             {isLoading && <div className="loader"></div>}
-            
+
             {animals.map(animal => <AnimalCard key={(animal as AnimalRespData).id} animal={animal}/>)}
 
             {!animals &&

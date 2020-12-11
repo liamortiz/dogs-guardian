@@ -26,7 +26,7 @@
         }
         .description {
             text-align: left;
-            font-size: 100%;
+            font-size: 95%;
             font-family: 'Roboto';
             line-height: 1.5em;
             width: 90%;
@@ -60,6 +60,10 @@
             background: $main-color;
         }
     }
+    .details {
+        font-family: 'Roboto';
+        text-align: center;
+    }
     .details-1 {
         min-height: 90%;
     }
@@ -67,28 +71,25 @@
         min-height: 87%;
         .extra-details {
             padding: 0;
-            font-family: 'Roboto';
-            text-align: center;
+            
             margin: 2em auto;
-            text-align: center;
             border-radius: 10px;
-            width: 80%;
+            width: 100%;
             li {
+                
                 display: inline-block;
-                text-align: center;
                 list-style: none;
-                font-weight: bold;
                 margin: .5em 0;
+                span {
+                    margin: 0 .4em;
+                }
             }
         }
     }
     .details-3 {
         min-height: 90%;
         p {
-            font-family: 'Roboto';
-            font-weight: lighter;
-            text-align: center;
-            font-size: 90%;
+            font-size: 95%;
             margin: .5em 0;
         }
     }

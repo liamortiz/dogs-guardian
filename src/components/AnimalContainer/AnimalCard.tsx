@@ -104,8 +104,8 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                     }
                 </Carousel>
                 <ul className="extra-details">
-                <li>{animal.gender}/</li>
-                <li>{animal.age}/</li>
+                <li>{animal.gender}<span>•</span></li>
+                <li>{animal.age}<span>•</span></li>
                 <li>{animal.breeds.primary}</li>
                 </ul>
             </div>

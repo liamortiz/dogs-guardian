@@ -34,7 +34,7 @@ const SearchContainer: React.FC = () => {
         <div id="search-container">
             <Dropdown  label={"size"} filterBy={filterBy} options={["Any", "Small", "Medium", "Large", "Extra Large"]}/>
             <Dropdown  label={"gender"} filterBy={filterBy} options={["Any", "Male", "Female"]}/>
-            <Dropdown  label={"type"} filterBy={filterBy} options={["Any", "Dog", "Cat", "Horse", "Rabbit", "Barnyard"]}/>
+            <Dropdown  label={"type"} filterBy={filterBy} options={["Any", "Dog", "Cat", "Horse", "Rabbit", "Barnyard", "Bird"]}/>
         </div>
     )
 }
