@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AnimalCard from './AnimalCard';
 import { getAnimals } from '../../api';
 import SearchContainer from '../SearchContainer/SearchContainer';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { animalStateAtom, filterStateAtom } from '../../atoms';
 
 import './style.scss';
 
@@ -29,23 +31,24 @@ interface AnimalRespData {
 
 const AnimalCardContainer: React.FC = () => {
     
-    const [animals, setAnimals] = useState<AnimalRespData[]>([]);
+    const [animals, setAnimals] = useRecoilState(animalStateAtom);
+    const currentFilter = useRecoilValue(filterStateAtom);
 
-    function updateAnimals(animalType: string) {
-        getAnimals(animalType).then(data => setAnimals(data.animals));
-    }
-    
-    useEffect(() => {updateAnimals("dog")}, []);
+    useEffect(() => {
+        getAnimals(`page=1&limit=100&type=${currentFilter.type}`)
+        .then(data => setAnimals(data.animals))
+    },[]);
 
     return (
         <div id="wrapper">
-        <SearchContainer updateAnimals={updateAnimals}/>
+        <SearchContainer/>
         <div id="animal-card-container">
             {
                 animals.map(animal=> {
-                    if (animal.photos.length > 1 && animal.description) {
-                        return <AnimalCard key={animal.id} animal={animal}/>
+                    if ((animal as AnimalRespData).photos.length > 1 && (animal as AnimalRespData).description) {
+                        return <AnimalCard key={(animal as AnimalRespData).id} animal={animal}/>
                     }
+                    return null;
                 })
             }
         </div>

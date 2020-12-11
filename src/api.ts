@@ -3,8 +3,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const AUTH_URL = "https://api.petfinder.com/v2/oauth2/token";
-const GET_ANIMALS_URL = "https://api.petfinder.com/v2/animals?page=1&limit=100&type=";
-const GET_ANIMAL_ID = "https://api.petfinder.com/v2/animals/"
+const BASE_URL = "https://api.petfinder.com/v2/animals?";
 
 interface ResponseTokenData {
     token: string,
@@ -26,24 +25,8 @@ function setToken() : void {
     })
 }
 
-export async function getAnimals(type: string) {
-    const resp = await fetch(GET_ANIMALS_URL + type, {
-        method: 'GET',
-        headers: {'Authorization': `Bearer ${cookies.get('token')}`}
-    })
-    .then(resp => resp.json())
-    .catch(() => {
-        console.error("Failed to make API call, re-authenticating..");
-        cookies.remove('token');
-        auth();
-        return {animals: []}
-    });
-
-    return resp;
-}
-
-export async function getAnimalById(id: number) {
-    const resp = await fetch(GET_ANIMAL_ID + id, {
+export async function getAnimals(params: string) {
+    const resp = await fetch(BASE_URL + params, {
         method: 'GET',
         headers: {'Authorization': `Bearer ${cookies.get('token')}`}
     })
@@ -55,7 +38,6 @@ export async function getAnimalById(id: number) {
         return {animals: []}
     });
     return resp;
-
 }
 
 export function auth() {

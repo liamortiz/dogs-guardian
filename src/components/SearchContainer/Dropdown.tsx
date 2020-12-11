@@ -1,20 +1,21 @@
 import React from 'react';
 
 interface DropdownProps {
-    updateAnimals: (animalType: string) => void,
+    filterBy: (filter: {action: string, value: string}) => void,
     options: string[],
     label: string
 }
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
     function handleDropdownChange(event: React.ChangeEvent) {
-        props.updateAnimals((event.target as HTMLSelectElement).value);
+        const filter = {action: props.label, value: (event.target as HTMLSelectElement).value}
+        props.filterBy(filter);
         
     }
     return (
         <select name="types" onChange={handleDropdownChange} defaultValue="1">
             <option value='1' disabled>{props.label}</option>
-            {props.options.map(option => <option value={option}>{option}</option>)}
+            {props.options.map(option => <option key={option} value={option}>{option}</option>)}
         </select>
     )
 }

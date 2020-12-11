@@ -73,8 +73,6 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
 
     useEffect(setPreviewImage, [animal.photos]);
 
-    console.log(animal)
-
     return (
         <div className="animal-card">
             
@@ -102,7 +100,7 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                     dotListClass="custom-dot-list-style"
                     itemClass="carousel-item-padding-40-px">
                     {
-                        (animal.photos as []).map((photo: {medium: string}) => <img src={photo.medium} alt=""/>)
+                        (animal.photos as []).map((photo: {medium: string}) => <img key={animal.id} src={photo.medium} alt=""/>)
                     }
                 </Carousel>
                 <ul className="extra-details">
