@@ -15,11 +15,11 @@ const App: React.FC = () => {
   }, [])
 
   return (
-      <RecoilRoot>
       <div className="App">
-        <AnimalContainer/>
+        <RecoilRoot>
+          <AnimalContainer/>
+        </RecoilRoot>
       </div>
-      </RecoilRoot>
   );
 }
 

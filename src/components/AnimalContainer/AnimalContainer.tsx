@@ -3,7 +3,7 @@ import AnimalCard from './AnimalCard';
 import { getAnimals } from '../../api';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import { useRecoilState } from 'recoil';
-import { animalStateAtom } from '../../atoms';
+import { animalStateAtom, filtersAtom } from '../../atoms';
 
 import './style.scss';
 
@@ -33,11 +33,13 @@ const AnimalCardContainer: React.FC = () => {
     
     const [animals, setAnimals] = useRecoilState(animalStateAtom);
     const [isLoading, setIsLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [searchFilters, setSearchFilters] = useRecoilState(filtersAtom);
     const [loadingNextPage, setLoadingNextPage] = useState(false);
+    
+    window.onscroll = autoFill;
 
     useEffect(() => {
-        getAnimals("type=dog&location=40.712776,-74.005974")
+        getAnimals(`type=${searchFilters.type}&location=${searchFilters.location}`)
         .then(animals => setAnimals((animals as [])))
     },[]);
 
@@ -50,19 +52,18 @@ const AnimalCardContainer: React.FC = () => {
     },[animals])
 
 
-    window.onscroll = () => {
+    function autoFill() {
         const yPosition = document.body.scrollHeight - document.documentElement.scrollTop - window.innerHeight;
         if (yPosition <= 0 && !loadingNextPage) {
-            console.log("here")
             setLoadingNextPage(true);
 
-            getAnimals("type=dog&location=40.712776,-74.005974", currentPage + 1)
+            getAnimals(`size=${searchFilters.size}&type=${searchFilters.type}&location=${searchFilters.location}&gender=${searchFilters.gender}`, searchFilters.page + 1)
             .then(a => {
                 setAnimals(animals.concat((a as [])));
                 setLoadingNextPage(false);
-                setCurrentPage(currentPage+1);
+                setSearchFilters({...searchFilters, page: searchFilters.page + 1});
             })
-        }
+        }   
     }
 
     return (

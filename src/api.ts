@@ -34,7 +34,7 @@ function filterAnimals(animals: {description: string, photos: []}[]) {
 }
 
 export async function getAnimals(params: string, page: number=1) {
-    const resp = await fetch(`${BASE_URL}${params}&page=${page}&limit=50&sort=recent`, {
+    const resp = await fetch(`${BASE_URL}${params}&page=${page}&limit=20&sort=recent`, {
         method: 'GET',
         headers: {'Authorization': `Bearer ${cookies.get('token')}`}
     })

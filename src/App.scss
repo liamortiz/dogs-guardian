@@ -1,6 +1,9 @@
 $main-color: #FF5151;
 $secondary-color: #DA566E;
 
+body {
+    margin: 0;
+}
 @font-face {
     font-family: 'Roboto';
     src: url('../src/assets/fonts/Roboto-Regular.ttf');
@@ -26,11 +29,6 @@ $secondary-color: #DA566E;
     &:hover {
         cursor: pointer;
     }
-}
-
-#wrapper {
-    padding: 0;
-    margin: 0;
 }
 
 .loader {
