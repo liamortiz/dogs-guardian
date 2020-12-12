@@ -81,6 +81,11 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                 <h2>Hi, I'm <span>{animal.name}</span></h2>
                 <div className="divider"></div>
                 <img src={imageSrc} alt=""/>
+                <ul className="extra-details">
+                <li>{animal.gender}<span>•</span></li>
+                <li>{animal.age}<span>•</span></li>
+                <li>{animal.breeds.primary}</li>
+                </ul>
                 <p className="description">{parseDescription(animal.description)}..</p>
             </div>
             }
@@ -106,11 +111,6 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                             <img key={animal.id} src={photo.medium} alt=""/>)
                     }
                 </Carousel>
-                <ul className="extra-details">
-                <li>{animal.gender}<span>•</span></li>
-                <li>{animal.age}<span>•</span></li>
-                <li>{animal.breeds.primary}</li>
-                </ul>
             </div>
             }
 
@@ -122,6 +122,7 @@ const AnimalCard: React.FC<{animal:AnimalRespData}> = ({ animal }) => {
                 <p>{animal.contact.address.state} {animal.contact.address.city} {animal.contact.address.country}</p>
                 <p>{animal.contact.email}</p>
                 <p>{animal.contact.phone}</p>
+                <p><a href="https://www.petfinder.com/" target="_blank" rel="noreferrer">Visit Petfinder.com</a></p>
             </div>
             }
             <div ref={smallNavigation} className="bullet-nav">

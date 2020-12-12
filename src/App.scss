@@ -41,15 +41,33 @@ body {
     animation: spin 2s linear infinite;
     margin: 0 auto;
     margin-top: 12em;
-  }
+}
   
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+/* Safari */
+@-webkit-keyframes spin {
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+
+@media only screen and (max-width: 900px) {
+#animal-card-container {
+    padding-top: 7em;
+}
+}
+
+@media only screen and (max-width: 483px) {
+#animal-card-container {
+    padding-top: 10em;
+}
+}
+@media only screen and (max-width: 300px) {
+#animal-card-container {
+    padding-top: 14em;
+}
+}

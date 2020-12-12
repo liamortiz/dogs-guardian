@@ -1,10 +1,11 @@
 @import '../../App.scss';
 #search-container {
+    position: fixed;
+    z-index: 9999;
     display: flex;
     background: $main-color;
     width: 100%;
     min-height: 4rem;
-    margin-bottom: 1em;
     flex-direction: row;
     padding: .5em;
     box-sizing: border-box;
@@ -15,6 +16,8 @@
         align-self: center;
         margin: 0 1em;
         min-width: 150px;
+        font-family: 'Roboto';
+        font-size: 90%;
         &:focus, &:hover {
             outline: none;
             border: none;

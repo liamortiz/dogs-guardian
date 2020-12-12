@@ -13,7 +13,9 @@ const animalTypeOptions = [
     {value: 'bird', label: 'Bird'},
     {value: 'horse', label: 'Horse'},
     {value: 'rabbit', label: 'Rabbit'},
-    {value: 'barnyard', label: 'Barnyard'}
+    {value: 'barnyard', label: 'Barnyard'},
+    {value: 'small-furry', label: 'Small & Furry'},
+    {value: 'scales-fins-other', label: 'Scales, Fins & Other'}
 ]
 
 const animalGenderOptions = [
@@ -38,34 +40,18 @@ const SearchContainer: React.FC = () => {
     function filterBy(params: {type: string, values: any}) {
         
         if (!params.values) params.values = [];
-
-        const selectedOptions = (params.values as {value: string, label:string }[]);
-        const values = selectedOptions.map(option => option.value);
-        const requestURL = values.join(',');
-
         setAnimals([]);
 
-        switch(params.type) {
-            case 'type':
-                getAnimals(`size=${filters.size}&type=${requestURL}&location=${filters.location}&gender=${filters.gender}`)
+        const selectedOptions = (params.values as {value: string, label:string }[]);
+        const values = selectedOptions.map(option => option.value).join(',');
+        const newFilters = {...filters, [params.type]: values, page:1}
+
+        const requestURL = `size=${newFilters.size}&type=${newFilters.type}&location=${newFilters.location}&gender=${newFilters.gender}`
+
+        if (['type', 'gender', 'size'].includes(params.type)) {
+            setFilters(newFilters);
+            getAnimals(requestURL)
                     .then(animals => setAnimals((animals as [])));
-                
-                setFilters({...filters, type: requestURL, page: 1})
-                break;
-            case 'gender':
-                getAnimals(`size=${filters.size}&type=${filters.type}&location=${filters.location}&gender=${requestURL}`)
-                    .then(animals => setAnimals((animals as [])));
-                
-                setFilters({...filters, gender: requestURL, page: 1})
-                break;
-            case 'size':
-                getAnimals(`type=${filters.type}&location=${filters.location}&gender=${filters.gender}&size=${requestURL}`)
-                    .then(animals => setAnimals((animals as [])));
-                
-                setFilters({...filters, size: requestURL, page: 1})
-                break;
-            default:
-                break;
         }
     }
     
@@ -87,7 +73,6 @@ const SearchContainer: React.FC = () => {
             <Select 
             onChange={(options) => {filterBy({type: 'gender', values: options})}}
             options={animalGenderOptions} 
-            defaultValue={[animalGenderOptions[0], animalGenderOptions[1]]}
             isMulti
             name="colors"
             className="multi-select gender-select"
@@ -101,7 +86,6 @@ const SearchContainer: React.FC = () => {
             <Select 
             onChange={(options) => {filterBy({type: 'size', values: options})}}
             options={animalSizeOptions} 
-            defaultValue={animalSizeOptions}
             isMulti
             name="colors"
             className="multi-select"

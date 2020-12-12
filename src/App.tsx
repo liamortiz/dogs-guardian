@@ -6,9 +6,9 @@ import AnimalContainer from './components/AnimalContainer/AnimalContainer';
 
 import './App.scss';
 
-const App: React.FC = () => {
+auth();
 
-  auth();
+const App: React.FC = () => {
   useEffect(() => {
     const authInterval = setInterval(auth, 3500 * 1000);
     return () => clearInterval(authInterval);

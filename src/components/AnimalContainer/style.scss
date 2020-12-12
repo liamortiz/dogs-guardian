@@ -5,6 +5,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 5em;
+
+    .carousel-container {
+        img {
+            border: 1px solid gray;
+            box-shadow: 1px 1px 5px rgb(155, 155, 155);
+        }
+    }
 
     .animal-card {
         border: 1px solid rgb(201, 201, 201);
@@ -32,7 +40,7 @@
             line-height: 1.5em;
             width: 90%;
             margin: 0 auto;
-            padding-top: 2em;
+            margin-top: -1em;
         }
         img {
             width: 95%;
@@ -40,6 +48,8 @@
             display: block;
             margin: 0 auto;
             margin-top: 1em;
+            border: 1px solid gray;
+            box-shadow: 1px 1px 5px rgb(155, 155, 155);
         }
     }
     .bullet-nav {
@@ -67,9 +77,6 @@
     }
     .details-1 {
         min-height: 90%;
-    }
-    .details-2 {
-        min-height: 87%;
         .extra-details {
             padding: 0;
             
@@ -77,15 +84,18 @@
             border-radius: 10px;
             width: 100%;
             li {
-                
+                font-size: 90%;
                 display: inline-block;
                 list-style: none;
-                margin: .5em 0;
+                font-weight: bold;
                 span {
                     margin: 0 .4em;
                 }
             }
         }
+    }
+    .details-2 {
+        min-height: 90%;
     }
     .details-3 {
         min-height: 90%;
