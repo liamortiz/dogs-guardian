@@ -62,12 +62,22 @@ body {
 }
 
 @media only screen and (max-width: 483px) {
-#animal-card-container {
-    padding-top: 10em;
+    #animal-card-container {
+        padding-top: 10em;
+    }
+    
+    .multi-select {
+        margin: .2em .2em !important;
+    }
 }
+@media only screen and (max-width: 552px) {
+    .multi-select {
+        margin: 0 .2em !important;
+    }
 }
+
 @media only screen and (max-width: 300px) {
-#animal-card-container {
-    padding-top: 14em;
-}
+    #animal-card-container {
+        padding-top: 14em;
+    }
 }

@@ -1,5 +1,24 @@
 @import '../../App.scss';
 
+.load-more-btn {
+    display: block;
+    width: 70%;
+    margin: 2em auto;
+    font-family: 'Roboto';
+    border: none;
+    padding: 1em;
+    box-sizing: border-box;
+    background: $main-color;
+    color: white;
+    border-radius: 10px;
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
 #animal-card-container {
     display: flex;
     flex-direction: row;
@@ -45,6 +64,7 @@
         img {
             width: 95%;
             height: auto;
+            
             display: block;
             margin: 0 auto;
             margin-top: 1em;

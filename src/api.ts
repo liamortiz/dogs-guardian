@@ -17,16 +17,15 @@ const tokenRequestBody = {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 }
 
-function setToken() : void {
-    fetch(AUTH_URL, tokenRequestBody)
+export async function setToken() {
+    console.log("Authenticating..");
+    const token = await fetch(AUTH_URL, tokenRequestBody)
     .then(resp => resp.json())
     .then((data: ResponseTokenData) => {
         cookies.set('token', data.access_token, { path: '/'});
+        return data.access_token;
     })
-}
-export function auth() {
-    console.log("Authenticating..");
-    setToken();
+    return token;
 }
 
 function filterAnimals(animals: {description: string, photos: []}[]) {
@@ -39,9 +38,5 @@ export async function getAnimals(params: string, page: number=1) {
         headers: {'Authorization': `Bearer ${cookies.get('token')}`}
     })
     .then(resp => resp.json())
-    .catch((err) => {
-        console.error("Failed to make API call", err);
-        return {animals: []}
-    });
     return filterAnimals(resp.animals);
 }
