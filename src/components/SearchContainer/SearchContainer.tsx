@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { animalStateAtom, filtersAtom } from '../../atoms';
 import { getAnimals } from '../../api';
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
 
 import './style.scss';
 
@@ -34,10 +38,11 @@ const animatedComponents = makeAnimated();
 
 const SearchContainer: React.FC = () => {
 
-    const [animals, setAnimals] = useRecoilState(animalStateAtom);
+    const [, setAnimals] = useRecoilState(animalStateAtom);
     const [filters, setFilters] = useRecoilState(filtersAtom);
+    const [address, setAddress] = useState("");
 
-    function filterBy(params: {type: string, values: any}) {
+    function filterBy(params: {type: string, values: any | []}) {
         
         if (!params.values) params.values = [];
         setAnimals([]);
@@ -48,15 +53,41 @@ const SearchContainer: React.FC = () => {
 
         const requestURL = `size=${newFilters.size}&type=${newFilters.type}&location=${newFilters.location}&gender=${newFilters.gender}`
 
-        if (['type', 'gender', 'size'].includes(params.type)) {
+        if (['type', 'gender', 'size', 'location'].includes(params.type)) {
             setFilters(newFilters);
             getAnimals(requestURL)
                     .then(animals => setAnimals((animals as [])));
         }
     }
+
+    async function handleSelect(addr: string) {
+        const location = await geocodeByAddress(addr);
+        const coordinates = await getLatLng(location[0]);
+        if (coordinates) {
+            setAddress(addr);
+            filterBy({type: 'location', values: [{value: coordinates.lat}, {value: coordinates.lng}]});
+        }
+    }
     
     return (
         <div id="search-container">
+            <PlacesAutocomplete value={address} onChange={(addr) => {setAddress(addr)}} onSelect={handleSelect}>
+                {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+                    <div className="auto-complete">
+                        <input {...getInputProps({ placeholder: "Location" })}/>
+                        <div className="auto-complete-suggestions">
+                            {suggestions.map((suggestion, index) => {
+                                return (
+                                    <div {...getSuggestionItemProps(suggestion)} key={index} className="suggestions">
+                                        <span>{suggestion.description}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                )}
+
+            </PlacesAutocomplete>
             <Select 
             onChange={(options) => {filterBy({type: 'type', values: [options]})}}
             options={animalTypeOptions} 

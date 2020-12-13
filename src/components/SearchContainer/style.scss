@@ -10,7 +10,7 @@
     padding: .5em;
     box-sizing: border-box;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     .multi-select {
         align-self: center;
@@ -21,6 +21,48 @@
         &:focus, &:hover {
             outline: none;
             border: none;
+        }
+    }
+
+    .auto-complete {
+        position: relative;
+        font-family: 'Roboto';
+        input {
+            padding: .8em;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Roboto';
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .auto-complete-suggestions {
+            background: white;
+            font-family: 'Roboto';
+            text-align: left;
+            position: absolute;
+            width: 160px;
+            border-radius: 5px;
+            z-index: 999999;
+            .suggestions {
+                padding: .7em;
+                font-size: 90%;
+                margin: .2em 0;
+                &:hover {
+                    cursor: pointer;
+                    background: darken($color: $main-color, $amount: 5%);
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    #search-container {
+        .multi-select {
+            margin: .1em auto;
         }
     }
 }
