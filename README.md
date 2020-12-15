@@ -7,6 +7,7 @@
   <li>React Hooks</li>
   <li>Google Places API (Restricted Key) </li>
   <li>Petfinder API</li>
+  <li>Recoil</li>
   <li>HTML</li>
   <li>SASS</li>
 </ul>
